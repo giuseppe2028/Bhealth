@@ -1,0 +1,58 @@
+name: CI Pipeline
+
+# Trigger the pipeline on every push and pull request to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint_commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint commits
+        run: npx commitlint --from=HEAD~1 --to=HEAD
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Install project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests to validate the code
+      - name: Run tests
+        run: npm test
+
+      # Build the project for production
+      - name: Build project
+        run: npm run build
+
+      # Checks the typescript types
+      - name: TypeScript type check
+        run: npx tsc --noEmit
+
+      # Checks the linter
+      - name: Run linter
+        run: npx eslint . --ext .ts,.tsx

@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My API",
+    "version": "1.0.0",
+    "description": "Documentazione delle API"
+  },
+  "paths": {
+    "/api/items": {
+      "get": {
+        "summary": "Ottieni tutti gli oggetti",
+        "responses": {
+          "200": {
+            "description": "Lista degli oggetti",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
