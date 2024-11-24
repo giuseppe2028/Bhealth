@@ -6,6 +6,12 @@
   },
   "scripts": {
     "lint:commits": "commitlint --from=HEAD~1 --to=HEAD",
-    "prepare": "husky install"
+    "prepare": "husky",
+    "test": "echo 'No tests specified'"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "npx --no-install commitlint --edit $1"
+    }
   }
 }
