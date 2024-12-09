@@ -5,19 +5,130 @@
     "version": "1.0.0",
     "description": "Documentazione delle API"
   },
+  "tags": [
+    {
+      "name": "diet",
+      "description": "Everything about your diet"
+    },{
+      "name": "workout",
+      "description": "Everything about your workout"
+    },{
+      "name": "Weight",
+      "description": "Everything about your workout"
+    }
+  ],
   "paths": {
-    "/api/items": {
+    "/api/diet/:week/:day": {
       "get": {
-        "summary": "Ottieni tutti gli oggetti",
+        "summary": "Get all the plates of a specific day",
         "responses": {
           "200": {
-            "description": "Lista degli oggetti",
+            "description": "List of all the plates",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "meal": {
+                        "type": "string"
+                      },
+                      "calories": {
+                        "type": "number"
+                      },
+                      "weight": {
+                        "type": "number"
+                      },
+                      "nutritionalValues": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "protein": {
+                              "type": "number"
+                            },
+                            "carbs": {
+                              "type": "number"
+                            },
+                            "fat": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/diet/meals/:id":{
+      "get": {
+        "summary": "Get all the infos of a specific meal",
+        "responses": {
+          "200": {
+            "description": "List of all the infos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "calories": {
+                      "type": "number"
+                    },
+                    "nutritionalValues": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "protein": {
+                            "type": "number"
+                          },
+                          "carbs": {
+                            "type": "number"
+                          },
+                          "fat": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "ingridients": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "quantity":{
+                            "type": "number"
+                          },
+                          "weight": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "description": {
+                      "type": "string"
+                    }
                   }
                 }
               }
