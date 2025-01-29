@@ -1,7 +1,11 @@
 import morgan from 'morgan';
 import express from "express";
+import {AuthRoutes, UserRoutes} from "./routes/UserRoutes";
+import Authenticator from "./routes/auth";
+import ErrorHandler from "./helper";
+import {DietRoutes} from "./routes/DietRoutes";
 
-const prefix = '/bhealt/api';
+const prefix = '/bhealth/api';
 
 /**
  * Initializes the routes for the application.
@@ -23,12 +27,17 @@ function initRoutes(app: express.Application) {
      * It is also used to protect routes by requiring users to have the correct role.
      * All routes must have the authenticator object in order to work properly.
      */
-
-
+    const authenticator = new Authenticator(app);
+    const userRoutes = new UserRoutes();
+    const authRoutes = new AuthRoutes(authenticator);
+    const dietRoutes = new DietRoutes(authenticator);
     /**
      * The routes for the user, authentication, resources are defined here.
      */
-
+    app.use(`${prefix}/users`,userRoutes.getRouter());
+    app.use(`${prefix}/sessions`, authRoutes.getRouter());
+    app.use(`${prefix}/diet`, dietRoutes.getRouter());
+    ErrorHandler.registerErrorHandler(app);
 }
 
 export default initRoutes;

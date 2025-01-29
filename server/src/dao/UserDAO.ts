@@ -26,7 +26,7 @@ class UserDAO {
                  * Using the salt is not mandatory (while it is a good practice for security), however passwords MUST be hashed using a secure algorithm (e.g. scrypt, bcrypt, argon2).
                  */
                 const sql =
-                    'SELECT username, password, salt FROM users WHERE username = $1';
+                    'SELECT username,salt,password FROM users WHERE username = $1';
                 db.query(sql, [username], (err: Error | null, result: any) => {
                     if (err) {
                         reject(err);
@@ -64,21 +64,26 @@ class UserDAO {
      * @returns A Promise that resolves to true if the user has been created.
      */
     createUser(
+        name:string,
         username: string,
         password: string,
         role: string,
+        mail:string,
+        surname: string,
     ): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             try {
-                const salt = crypto.randomBytes(16);
-                const hashedPassword = crypto.scryptSync(password, salt, 16);
+                const salt = crypto.randomBytes(16).toString('hex')
+                const hashedPassword = crypto.scryptSync(password, salt, 16).toString('hex')
                 const sql =
-                    'INSERT INTO users(username, role, password, salt) VALUES($1, $2, $3, $4)';
+                    'INSERT INTO users(name, username, role, password, salt,mail,surname) VALUES($1, $2, $3, $4,$5,$6,$7)';
                 db.query(
                     sql,
-                    [username, role, hashedPassword, salt],
+                    [name,username, role, hashedPassword, salt,mail,surname],
                     (err: Error | null) => {
                         if (err) {
+                            console.log("error")
+                            console.log(err)
                             if (
                                 err.message.includes(
                                     'duplicate key value violates unique constraint "users_pkey"',

@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './docs/swagger.json';
+import initRoutes from "./routes";
 
 
 dotenv.config();
@@ -14,6 +15,9 @@ app.use((err: Error, req: Request, res: Response, next: Function) => {
     console.error(err.stack);
     res.status(500).send({ error: 'Something went wrong!' });
 });
+
+initRoutes(app)
+
 //TODO to protect
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

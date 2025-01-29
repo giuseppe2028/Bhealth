@@ -32,7 +32,7 @@ class Authenticator {
     initAuth() {
         this.app.use(
             session({
-                secret: 'kirunaexplorer24',
+                secret: 'Bhealth',
                 resave: false,
                 saveUninitialized: false,
                 maxAge: 7 * 24 * 60 * 60 * 1000,
