@@ -8,7 +8,7 @@
     "lint:commits": "commitlint --from=HEAD~1 --to=HEAD",
     "prepare": "husky",
     "test": "echo 'No tests specified'",
-    "build": " npm install && tsc",
+    "build": " cd server && npm install && tsc",
     "start": "node ./server/dist/index.js"
   },
   "husky": {
