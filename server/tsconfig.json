@@ -3,6 +3,7 @@
     "target": "es2020",
     "module": "commonjs",
     "strict": true,
+    "noEmit": false,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
