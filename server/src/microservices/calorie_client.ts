@@ -1,7 +1,7 @@
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 
-const packageDefinition = protoLoader.loadSync("./proto/calorie.proto", {
+const packageDefinition = protoLoader.loadSync("./server/src/proto/calorie.proto", {
     keepCase: true,
     longs: String,
     enums: String,
