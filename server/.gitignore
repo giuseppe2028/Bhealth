@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# TypeScript build output
+dist/
+out/
+*.js
+*.js.map
+*.d.ts
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor e IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.pssproj
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Husky
+.husky/_
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
