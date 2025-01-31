@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": ["name", "type", "preparation"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "type": {
+        "type": "string",
+        "enum": ["colazione", "pranzo", "cena", "merenda"]
+      },
+      "preparation": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "category": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "ingredients": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "idIngredient": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "additionalProperties": false
+  }
+}

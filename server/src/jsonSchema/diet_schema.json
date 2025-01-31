@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["current","plates"],
+  "properties": {
+    "current": {
+      "type": "boolean"
+    },
+    "plates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "idPlate": {
+            "type": "integer"
+          },
+          "week": {
+            "type": "integer"
+          },
+          "day": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+    "additionalProperties": false
+  }

@@ -1,9 +1,11 @@
 import morgan from 'morgan';
-import express from "express";
+import express, {NextFunction} from "express";
 import {AuthRoutes, UserRoutes} from "./routes/UserRoutes";
 import Authenticator from "./routes/auth";
 import ErrorHandler from "./helper";
 import {DietRoutes} from "./routes/DietRoutes";
+import Validator from "./validator/validator";
+import validator from "./validator/validator";
 
 const prefix = '/bhealth/api';
 
@@ -21,6 +23,7 @@ function initRoutes(app: express.Application) {
     app.use(express.json({ limit: '25mb' }));
     app.use(express.urlencoded({ limit: '25mb', extended: true }));
 
+
     /**
      * The authenticator object is used to authenticate users.
      * It is used to protect the routes by requiring users to be logged in.
@@ -28,12 +31,14 @@ function initRoutes(app: express.Application) {
      * All routes must have the authenticator object in order to work properly.
      */
     const authenticator = new Authenticator(app);
+    const validator = new Validator();
     const userRoutes = new UserRoutes();
     const authRoutes = new AuthRoutes(authenticator);
-    const dietRoutes = new DietRoutes(authenticator);
+    const dietRoutes = new DietRoutes(authenticator,validator);
     /**
      * The routes for the user, authentication, resources are defined here.
      */
+
     app.use(`${prefix}/users`,userRoutes.getRouter());
     app.use(`${prefix}/sessions`, authRoutes.getRouter());
     app.use(`${prefix}/diet`, dietRoutes.getRouter());
