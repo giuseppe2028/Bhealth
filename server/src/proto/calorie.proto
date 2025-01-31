@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service CalorieService{
+  rpc CalculateCalories(Plate) returns (CalorieResponse);
+}
+message Plate {
+  int64 name = 1;
+}
+
+message CalorieResponse{
+  int64 food = 1;
+  float calories =2;
+  float carbs = 3;
+  float proteins = 5;
+  float fats = 6;
+}

@@ -1,0 +1,3 @@
+pip install grpcio grpcio-tools
+pip3 install psycopg2
+pip install python-dotenv
